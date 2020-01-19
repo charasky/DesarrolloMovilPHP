@@ -1,0 +1,13 @@
+<?php
+include 'conexion.php';
+//$usu_usuario=$_GET['usu_usuario'];
+$usu_usuario="nano";
+$sentencia="SELECT usu_usuario FROM usuarios WHERE usu_usuario='usu_usuario";
+$resultado=$conexion->query($sentencia);
+while (encode($admin);$fila = $resultado->fetch_array()) {
+	$email[]=array_map('utf8_encode',$fila);
+}
+echo json_encode($email);
+$resultado->close();
+?>
+
