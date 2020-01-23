@@ -53,7 +53,7 @@
 			return $stmt->get_result()->fetch_assoc();
 		}
 
-		private function isUserExist($usu_usuario){
+		public function isUserExist($usu_usuario){
 			$stmt = $this->con->prepare("SELECT id FROM usuarios WHERE usu_usuario = ?");
 			$stmt->bind_param("s",$usu_usuario);
 			$stmt->execute();
@@ -62,7 +62,7 @@
 		}
 
 		public function getExisteAsamblea($usu_asamblea){
-			$stmt = $this->con2->prepare("SELECT ID_asamblea FROM asamblea WHERE usu_asamblea = ?");
+			$stmt = $this->con2->prepare("SELECT id FROM asamblea WHERE usu_asamblea = ?");
 			$stmt->bind_param("s",$usu_asamblea);
 			$stmt->execute();
 			$stmt->store_result();
