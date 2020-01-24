@@ -1,5 +1,5 @@
 <?php 
 	define('hostname', 'localhost');
-	define('username', 'root');
-	define('password', '');
+	define('username', 'test');
+	define('password', 'password');
 	define('userbase', 'datos');
