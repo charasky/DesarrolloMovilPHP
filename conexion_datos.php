@@ -2,8 +2,8 @@
 error_reporting(E_ALL ^ E_NOTICE);
 $hostname='localhost';
 $database='datos';
-$username='test';
-$password='password';
+$username='root';
+$password='';
 
 $conexion=new mysqli($hostname,$username,$password,$database);
 if($conexion->connect_errno){
