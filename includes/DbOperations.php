@@ -68,6 +68,17 @@
 			$stmt->store_result();
 			return $stmt->num_rows > 0;	
 		}
+
+		public function getDisabledUsers(){
+			$stmt = $this->con->query("SELECT `usu_usuario`, `usu_nombres`, `usu_apellidos`, `usu_asamblea` FROM `usuarios` WHERE `usu_validacion` LIKE 'FALSE'");
+			$disabledDatos= array();
+
+			while($resultado = $stmt->fetch_assoc()){
+				$disabledDatos[] = $resultado; 
+			}
+ 		   	return $disabledDatos;
+		}
+		
 }
 
 
