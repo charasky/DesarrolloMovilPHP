@@ -1,37 +1,22 @@
 
 <?php 
-//en proceso
+
 require_once '../includes/DbOperations.php';
 
 $response = array(); 
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
-	if(
-		isset($_POST['usu_usuario']) and 
-			isset($_POST['usu_password'])){
+	if(isset($_POST['usu_usuario']) and isset($_POST['usu_password'])){
 
 		$db = new DbOperations();
-		
-		$result = $db->createUser($_POST['usu_usuario'],
-					$_POST['usu_password'],
-					$_POST['usu_nombres'],
-					$_POST['usu_apellidos'],
-					$_POST['usu_asamblea']
-					);
-		if($result == 1){
+		$result = $db->restorePassword($_POST['usu_usuario'],$_POST['usu_password']);
+		if($result > 0){
 			$response['error'] = false;
-			$response['message'] = "Registro exitoso.";
-		}elseif($result == 2){
-			$response['error'] = true;
-			$response['message'] = "Algun error ocurrio intente denuevo.";
-		}elseif($result == 3){
-			$response['error'] = true;
-			$response['message'] = "La Asamblea ingresada no existe.";
-			$response['existe'] = "asamblea";
+			$response['message'] = "Cambio con exito";
 		}elseif($result == 0){
 			$response['error'] = true;
-			$response['message'] = "El email ingresado ya existe, ingrese otro.";
-			$response['existe'] = "email";
+			$response['message'] = "El email ingresado no existe";
+			$response['revisar'] = "email";
 		}
 	}else{
 		$response['error'] = true;
@@ -43,3 +28,5 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 }
 
 echo json_encode($response);
+
+?>

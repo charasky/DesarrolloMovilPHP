@@ -78,7 +78,25 @@
 			}
  		   	return $disabledDatos;
 		}
-		
+
+		public function restorePassword($usu_usuario, $usu_pass){
+			if(!$this->isUserExist($usu_usuario)){
+				return 0;
+			}else{
+				$usu_password = md5($usu_pass);
+				$userId = $this->getIdUser($usu_usuario);
+				$id = $userId['id'];
+				$stmt = $this->con->prepare("UPDATE `usuarios` SET `usu_password` = '$usu_password' WHERE `usuarios`.`id` = $id");
+				$stmt->execute();	
+				return 1;	
+			}	
+		}
+
+		private function getIdUser($usu_usuario){
+			$stmt = $this->con->prepare("SELECT `id` FROM `usuarios` WHERE `usu_usuario` LIKE '$usu_usuario'");
+			$stmt->execute();
+			return $stmt->get_result()->fetch_assoc();
+		}
 }
 
 
