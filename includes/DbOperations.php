@@ -84,8 +84,7 @@
 				return 0;
 			}else{
 				$usu_password = md5($usu_pass);
-				$userId = $this->getIdUser($usu_usuario);
-				$id = $userId['id'];
+				$id = $this->getIdUser($usu_usuario);
 				$stmt = $this->con->prepare("UPDATE `usuarios` SET `usu_password` = '$usu_password' WHERE `usuarios`.`id` = $id");
 				$stmt->execute();	
 				return 1;	
@@ -95,7 +94,15 @@
 		private function getIdUser($usu_usuario){
 			$stmt = $this->con->prepare("SELECT `id` FROM `usuarios` WHERE `usu_usuario` LIKE '$usu_usuario'");
 			$stmt->execute();
-			return $stmt->get_result()->fetch_assoc();
+			$id = $stmt->get_result()->fetch_assoc();
+			return $id['id'];
+		}
+
+		public function blockUser($usu_usuario){
+			$id = $this->getIdUser($usu_usuario);
+			$stmt = $this->con->prepare("UPDATE `usuarios` SET `usu_validacion` = 'FALSE' WHERE `usuarios`.`id` = $id");
+			$stmt->execute();	
+			return 1;
 		}
 }
 
