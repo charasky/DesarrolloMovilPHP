@@ -14,5 +14,5 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 	}
 }
 
-echo json_encode(array("Reportes" => $response));
+echo json_encode(array("Users" => $response));
 ?>

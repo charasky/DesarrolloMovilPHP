@@ -11,17 +11,15 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			isset($_POST['usu_password']) and 
 				isset($_POST['usu_nombres']) and 
 					isset($_POST['usu_apellidos']) and 
-						isset($_POST['usu_asamblea']))
-		{
-		//operate the data further 
+						isset($_POST['usu_asamblea'])){
 
 		$db = new DbOperations();
 		
-		$result = $db->createUser(	$_POST['usu_usuario'],
-						$_POST['usu_password'],
-						$_POST['usu_nombres'],
-						$_POST['usu_apellidos'],
-						$_POST['usu_asamblea']
+		$result = $db->createUser($_POST['usu_usuario'],
+					$_POST['usu_password'],
+					$_POST['usu_nombres'],
+					$_POST['usu_apellidos'],
+					$_POST['usu_asamblea']
 					);
 		if($result == 1){
 			$response['error'] = false;
