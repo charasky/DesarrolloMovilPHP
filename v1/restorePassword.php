@@ -7,24 +7,16 @@ $response = array();
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
 	if(isset($_POST['usu_usuario']) and isset($_POST['usu_password'])){
-		//tendria que poner 'contador'
-		
-		if($_POST['contador'] < 1){
-			$db = new DbOperations();
-			$result = $db->restorePassword($_POST['usu_usuario'],$_POST['usu_password']);
-			if($result > 0){
-				$response['error'] = false;
-				$response['message'] = "Cambio con exito";
-			}elseif($result == 0){
-				$response['error'] = true;
-				$response['message'] = "El email ingresado no existe";
-				$response['revisar'] = "revisar";
-			}
-		}else{
-			$response['message'] = "usuario bloquiado";
+		$db = new DbOperations();
+		$result = $db->restorePassword($_POST['usu_usuario'],$_POST['usu_password']);
+		if($result > 0){
+			$response['error'] = false;
+			$response['message'] = "Cambio con exito";
+		}elseif($result == 0){
+			$response['error'] = true;
+			$response['message'] = "El email ingresado no existe";
 			$response['revisar'] = "revisar";
 		}
-		
 	}else{
 		$response['error'] = true;
 		$response['message'] = "required fields are missing";	
