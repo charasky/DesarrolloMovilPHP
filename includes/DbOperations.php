@@ -70,7 +70,7 @@
 		}
 
 		public function getDisabledUsers(){
-			$stmt = $this->con->query("SELECT `usu_usuario`, `usu_nombres`, `usu_apellidos`, `usu_asamblea` FROM `usuarios` WHERE `usu_validacion` LIKE 'FALSE'");
+			$stmt = $this->con->query("SELECT `id`, `usu_usuario`, `usu_nombres`, `usu_apellidos`, `usu_asamblea` FROM `usuarios` WHERE `usu_validacion` LIKE 'FALSE'");
 			$disabledDatos= array();
 
 			while($resultado = $stmt->fetch_assoc()){
@@ -103,6 +103,17 @@
 			$stmt = $this->con->prepare("UPDATE `usuarios` SET `usu_validacion` = 'FALSE' WHERE `usuarios`.`id` = $id");
 			$stmt->execute();	
 			return 1;
+		}
+		
+		//nuevo .v.
+		public function enabledUser($id){
+			$stmt = $this->con->prepare("UPDATE `usuarios` SET `usu_validacion` = 'TRUE' WHERE `usuarios`.`id` = $id");
+			$stmt->execute();
+		}
+
+		public function deleteUser($id){
+			$stmt = $this->con->prepare("DELETE FROM `usuarios` WHERE `usuarios`.`id` = $id");
+			$stmt->execute();
 		}
 }
 
