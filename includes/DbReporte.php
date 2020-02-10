@@ -1,13 +1,17 @@
 <?php
 	class DbReporte{
+		private $con3;
 		private $con2;
 		
 		function __construct(){
 			
-			require_once dirname(__FILE__).'/DbConnect2.php';
-		
+			require_once dirname(__FILE__).'/DbConnect3.php';
+			require_once dirname(__FILE__).'/DbConnect2.php';			
+
 			$db2 = new DbConnect2();
-			
+			$db3 = new DbConnect3();
+			//revisar reporte
+			$this->con3 = $db3->connect3();
 			$this->con2 = $db2->connect2();
 		}
 	

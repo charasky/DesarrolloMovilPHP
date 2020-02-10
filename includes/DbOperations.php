@@ -115,6 +115,17 @@
 			$stmt = $this->con->prepare("DELETE FROM `usuarios` WHERE `usuarios`.`id` = $id");
 			$stmt->execute();
 		}
+		
+		public function movimientos(){
+			$stmt = $this->con2->query("SELECT `usu_usuario`, `usu_que_hizo`, `usu_fecha`, `usu_hora`, `usu_usuario_interaccion` FROM `movimiento`");
+			$movimientos= array();
+
+			while($resultado = $stmt->fetch_assoc()){
+				$movimientos[] = $resultado; 
+			}
+ 		   	return $movimientos;
+		}
+		
 }
 
 
