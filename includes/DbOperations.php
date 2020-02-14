@@ -105,7 +105,6 @@
 			return 1;
 		}
 		
-		//nuevo .v.
 		public function enabledUser($id){
 			$stmt = $this->con->prepare("UPDATE `usuarios` SET `usu_validacion` = 'TRUE' WHERE `usuarios`.`id` = $id");
 			$stmt->execute();
@@ -124,6 +123,20 @@
 				$movimientos[] = $resultado; 
 			}
  		   	return $movimientos;
+		}
+
+		public function crearMovimiento($usu_usuario, $usu_que_hizo, $usu_fecha, $usu_hora, $usu_usuario_interaccion){
+			$stmt = $this->con2->prepare("INSERT INTO `movimiento` (`id`, `usu_usuario`, `usu_que_hizo`, `usu_fecha`, `usu_hora`, `usu_usuario_interaccion`) VALUES (NULL, ?, ?, ?, ?, ?);");	
+			$stmt->bind_param("sssss",$usu_usuario,$usu_que_hizo,$usu_fecha,$usu_hora,$usu_usuario_interaccion);
+			$stmt->execute();	
+		}
+
+		//devuelve el email del usuario por id
+		public function getUserPorId($id){
+			$stmt = $this->con->prepare("SELECT `usu_usuario` FROM `usuarios` WHERE `id` = $id");
+			$stmt->execute();
+			$user = $stmt->get_result()->fetch_assoc();
+			return $user['usu_usuario'];
 		}
 		
 }
