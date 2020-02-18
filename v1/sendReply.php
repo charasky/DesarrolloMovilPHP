@@ -10,7 +10,6 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			isset($_POST['usu_hora']) and 
 				isset($_POST['params'])){
 
-	
 		$db = new DbOperations();
 
 		$usu_usuario=$_POST['usu_usuario'];
