@@ -84,8 +84,8 @@
 			$stmt->execute();	*/
 		}
 
-		public function hechoPolicial($usu_dia_hecho, $usu_hora_hecho, $usu_ubicacion_hecho, $usu_cuantos_acompañan, $usu_cual_lugar, $usu_provincia_hecho, $usu_pais_hecho){
-			$insert_hecho_policial="insert into hecho_policial values(NULL,'".$usu_dia_hecho."','".$usu_hora_hecho."','".$usu_ubicacion_hecho."','".$usu_cuantos_acompañan."','".$usu_cual_lugar."','".$usu_provincia_hecho."','".$usu_pais_hecho."')";
+		public function hechoPolicial($usu_dia_hecho, $usu_hora_hecho, $usu_cuantos_acompañan, $usu_cual_lugar, $usu_provincia_hecho, $usu_pais_hecho, $usu_direccion_hecho, $usu_barrio_hecho){
+			$insert_hecho_policial="insert into hecho_policial values(NULL,'".$usu_dia_hecho."','".$usu_hora_hecho."','".$usu_cuantos_acompañan."','".$usu_cual_lugar."','".$usu_provincia_hecho."','".$usu_pais_hecho."','".$usu_direccion_hecho."','".$usu_barrio_hecho."')";
 			mysqli_query($this->con3,$insert_hecho_policial) or die (mysqli_error($this->con3));
 			/*
 			$stmt = $this->con3->prepare("INSERT INTO `hecho_policial` (`id`, `usu_dia_hecho`, `usu_fecha_hecho`, `usu_ubicacion_hecho`, `usu_cuantos_acompañan`, `usu_cual_lugar`, `usu_provincia_hecho`, `usu_pais_hecho`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?);");	
@@ -140,9 +140,9 @@
 
 		//para que pueda verse en buscar
 
-		public function registrarReporte($registrar1, $registrar2, $registrar3, $registrar4, $registrar5, $registrar6){
-			$stmt = $this->con2->prepare("INSERT INTO `reporte` (`id`, `r_pais`, `r_ciudad`, `fecha`, `vic_nombre`, `vic_apellido`, `r_asamblea`) VALUES (NULL, ?, ?, ?, ?, ?, ?);");
-			$stmt->bind_param("ssssss",$registrar1, $registrar2, $registrar3, $registrar4, $registrar5, $registrar6);
+		public function registrarReporte($registrar1, $registrar2, $registrar3, $registrar4, $registrar5, $registrar6, $registrar7){
+			$stmt = $this->con2->prepare("INSERT INTO `reporte` (`id`, `r_pais`, `r_ciudad`, `fecha`, `vic_nombre`, `vic_apellido`, `r_asamblea`, `r_hora`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?);");
+			$stmt->bind_param("sssssss",$registrar1, $registrar2, $registrar3, $registrar4, $registrar5, $registrar6, $registrar7);
 			$stmt->execute();
 		}
 
