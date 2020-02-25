@@ -12,6 +12,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			$response['error'] = false;
 			$response['usu_asamblea'] = $user['usu_asamblea'];
 			$response['usu_usuario'] = $user['usu_usuario'];
+			$response['usu_nombres'] = $user['usu_nombres'];
+			$response['usu_apellidos'] = $user['usu_apellidos'];
 			$response['usu_validacion'] = $user['usu_validacion'];
 			$response['usu_administrador'] = $user['usu_administrador'];
         }else{
