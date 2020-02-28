@@ -180,7 +180,6 @@ class DbReporte{
 		$reporte[] = $this->getAllanamiento($id);
 		$reporte[] = $this->getEntrevistado($id);
 		$reporte[] = $this->getEntrevistador($id);
-		
 		return $reporte;
 	}
 }

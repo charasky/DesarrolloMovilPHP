@@ -17,9 +17,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 				$response = $db->getObtenerReporte($_POST['id']);
 			}else{
 				$response = "usuario no valido";
-			} 
-
-			//array_push($response,$db->getAllanamiento($id),$db->getCaracteristicasProcedimiento($id));
+			}
 	}else{
 		$response = "falta dato";
 	}
