@@ -169,17 +169,18 @@ class DbReporte{
 	public function getObtenerReporte($id){
 		$reporte = array();
 
-		$reporte[] = $this->getAllanamiento($id);
+		$reporte[] = $this->getVictima($id);
+		$reporte[] = $this->getTraslado($id);
+		$reporte[] = $this->getResultadoInvestigacion($id);
+		$reporte[] = $this->getOmisionActuar($id);
+		$reporte[] = $this->getModalidadDetencion($id);
+		$reporte[] = $this->getHechoPolicial($id);
+		$reporte[] = $this->getFuerzasIntervinientes($id);
 		$reporte[] = $this->getCaracteristicasProcedimiento($id);
+		$reporte[] = $this->getAllanamiento($id);
 		$reporte[] = $this->getEntrevistado($id);
 		$reporte[] = $this->getEntrevistador($id);
-		$reporte[] = $this->getFuerzasIntervinientes($id);
-		$reporte[] = $this->getHechoPolicial($id);
-		$reporte[] = $this->getModalidadDetencion($id);
-		$reporte[] = $this->getOmisionActuar($id);
-		$reporte[] = $this->getResultadoInvestigacion($id);
-		$reporte[] = $this->getTraslado($id);
-		$reporte[] = $this->getVictima($id);
+		
 		return $reporte;
 	}
 }
