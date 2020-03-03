@@ -166,6 +166,7 @@ class DbReporte{
 		return $stmt->get_result()->fetch_assoc();
 	}
 
+	/*
 	public function getObtenerReporte($id){
 		$reporte = array();
 
@@ -181,5 +182,5 @@ class DbReporte{
 		$reporte[] = $this->getEntrevistado($id);
 		$reporte[] = $this->getEntrevistador($id);
 		return $reporte;
-	}
+	}*/
 }
