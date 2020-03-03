@@ -15,8 +15,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 			$db = new DbReporte(); 
 			$db1 = new DbOperations();
+
+			var_dump($response);
 		
 			if($db1->isUserExist($usuario)){
+				var_dump($response);
 				$response[] = $db->getVictima($id);
 				$response[] = $db->getTraslado($id);
 				$response[] = $db->getResultadoInvestigacion($id);
@@ -28,10 +31,13 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 				$response[] = $db->getAllanamiento($id);
 				$response[] = $db->getEntrevistado($id);
 				$response[] = $db->getEntrevistador($id);
+				var_dump($response);
 			}else{
 				$response = "usuario no valido";
+				var_dump($response);
 			}
 	}else{
+		var_dump($response);
 		$response = "falta dato";
 	}
 }
