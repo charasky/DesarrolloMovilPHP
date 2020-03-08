@@ -166,7 +166,12 @@ class DbReporte{
 		return $stmt->get_result()->fetch_assoc();
 	}
 
-	/*
+	public function crearReporteAnonimo($usu_nombre_victima, $usu_apellido_victima, $usu_genero_victima, $usu_edad_victima, $usu_nacionalidad_victima, $usu_documento_victima, $usu_direccion_victima, $usu_barrio_victima, $usu_telefono_victima){
+		$insert_victima = "insert into victima values(NULL,'" . $usu_nombre_victima . "','" . $usu_apellido_victima . "','" . $usu_genero_victima . "','" . $usu_edad_victima . "','" . $usu_nacionalidad_victima . "','" . $usu_documento_victima . "','" . $usu_direccion_victima . "','" . $usu_barrio_victima . "','" . $usu_telefono_victima . "')";
+		mysqli_query($this->con3, $insert_victima) or die(mysqli_error($this->con3));
+	}
+
+	
 	public function getObtenerReporte($id){
 		$reporte = array();
 
@@ -182,5 +187,7 @@ class DbReporte{
 		$reporte[] = $this->getEntrevistado($id);
 		$reporte[] = $this->getEntrevistador($id);
 		return $reporte;
-	}*/
+	}
+	
+
 }
