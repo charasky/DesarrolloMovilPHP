@@ -166,12 +166,12 @@ class DbReporte{
 		return $stmt->get_result()->fetch_assoc();
 	}
 
-	public function crearReporteAnonimo($usu_nombre_victima, $usu_apellido_victima, $usu_genero_victima, $usu_edad_victima, $usu_nacionalidad_victima, $usu_documento_victima, $usu_direccion_victima, $usu_barrio_victima, $usu_telefono_victima){
-		$insert_victima = "insert into victima values(NULL,'" . $usu_nombre_victima . "','" . $usu_apellido_victima . "','" . $usu_genero_victima . "','" . $usu_edad_victima . "','" . $usu_nacionalidad_victima . "','" . $usu_documento_victima . "','" . $usu_direccion_victima . "','" . $usu_barrio_victima . "','" . $usu_telefono_victima . "')";
-		mysqli_query($this->con3, $insert_victima) or die(mysqli_error($this->con3));
+	public function crearReporteAnonimo($usu_email_anonimo, $usu_celular_anonimo, $usu_barrio_anonimo, $usu_provincia_anonimo, $usu_pais_anonimo, $usu_detalle_anonimo, $usu_fecha_hecho_anonimo, $usu_hora_hecho_anonimo, $fecha_reporte_anonimo_creacion, $hora_reporte_anonimo_creacion){
+		$insert_reporte_anonimo = "insert into reporteAnonimo values(NULL,'" . $usu_email_anonimo . "','" . $usu_celular_anonimo . "','" . $usu_barrio_anonimo . "','" . $usu_provincia_anonimo . "','" . $usu_pais_anonimo . "','" . $usu_detalle_anonimo . "','" . $usu_fecha_hecho_anonimo . "','" . $usu_hora_hecho_anonimo . "','" . $fecha_reporte_anonimo_creacion . "','" . $hora_reporte_anonimo_creacion . "')";
+		mysqli_query($this->con2, $insert_reporte_anonimo) or die(mysqli_error($this->con2));
 	}
 
-	
+
 	public function getObtenerReporte($id){
 		$reporte = array();
 
@@ -188,6 +188,6 @@ class DbReporte{
 		$reporte[] = $this->getEntrevistador($id);
 		return $reporte;
 	}
-	
+
 
 }
