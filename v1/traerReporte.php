@@ -38,9 +38,9 @@ function utf8ize($d) {
     return $d;
 }
 
-echo json_encode(utf8ize($response));
+echo json_encode($response, JSON_FORCE_OBJECT);
 
-echo json_encode($response);
+echo json_encode(utf8ize($response), JSON_FORCE_OBJECT);
 
 echo "todos putos :v "
 
