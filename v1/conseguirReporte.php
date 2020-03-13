@@ -40,6 +40,8 @@ function utf8ize($d) {
 
 echo json_encode(utf8ize($response));
 
-//echo (json_encode($response));
+echo json_encode($response);
+
+echo "todos putos :v "
 
 ?>
