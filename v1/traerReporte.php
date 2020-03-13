@@ -2,8 +2,7 @@
 
 require_once '../includes/DbReporte.php';
 require_once '../includes/DbOperations.php';
-
-$response = array();
+$response = [];
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
 
@@ -38,10 +37,16 @@ function utf8ize($d) {
     return $d;
 }
 
+
+echo( json_encode([
+  'data' => $response
+], JSON_UNESCAPED_UNICODE) );
+
 echo json_encode($response, JSON_FORCE_OBJECT);
 
 echo json_encode(utf8ize($response), JSON_FORCE_OBJECT);
 
-echo "todos putos :v "
+echo "todos putos :v 2 ";
+
 
 ?>
