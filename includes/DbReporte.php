@@ -93,77 +93,11 @@ class DbReporte{
 		mysqli_query($this->con3, $insert_victima) or die(mysqli_error($this->con3));
 	}
 
-	//traer la informacion
+
 	public function registrarReporte($registrar1, $registrar2, $registrar3, $registrar4, $registrar5, $registrar6, $registrar7){
 		$stmt = $this->con2->prepare("INSERT INTO `reporte` (`id`, `r_pais`, `r_ciudad`, `fecha`, `vic_nombre`, `vic_apellido`, `r_asamblea`, `r_hora`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?);");
 		$stmt->bind_param("sssssss", $registrar1, $registrar2, $registrar3, $registrar4, $registrar5, $registrar6, $registrar7);
 		$stmt->execute();
-	}
-
-	public function getAllanamiento($id){
-		$stmt = $this->con3->prepare("SELECT * FROM `allanamiento` WHERE `id` = $id");
-		$stmt->execute();
-		return $stmt->get_result()->fetch_assoc();
-	}
-
-	public function getCaracteristicasProcedimiento($id){
-		$stmt = $this->con3->prepare("SELECT * FROM `caracteristicas_procedimiento` WHERE `id` = $id");
-		$stmt->execute();
-		return $stmt->get_result()->fetch_assoc();
-	}
-
-	public function getEntrevistado($id){
-		$stmt = $this->con3->prepare("SELECT * FROM `entrevistado` WHERE `id` = $id");
-		$stmt->execute();
-		return $stmt->get_result()->fetch_assoc();
-	}
-
-	public function getEntrevistador($id){
-		$stmt = $this->con3->prepare("SELECT * FROM `entrevistador` WHERE `id` = $id");
-		$stmt->execute();
-		return $stmt->get_result()->fetch_assoc();
-	}
-
-	public function getFuerzasIntervinientes($id){
-		$stmt = $this->con3->prepare("SELECT * FROM `fuerzas_intervinientes` WHERE `id` = $id");
-		$stmt->execute();
-		return $stmt->get_result()->fetch_assoc();
-	}
-
-	public function getHechoPolicial($id){
-		$stmt = $this->con3->prepare("SELECT * FROM `hecho_policial` WHERE `id` = $id");
-		$stmt->execute();
-		return $stmt->get_result()->fetch_assoc();
-	}
-
-	public function getModalidadDetencion($id){
-		$stmt = $this->con3->prepare("SELECT * FROM `modalidad_detencion` WHERE `id` = $id");
-		$stmt->execute();
-		return $stmt->get_result()->fetch_assoc();
-	}
-
-	public function getOmisionActuar($id){
-		$stmt = $this->con3->prepare("SELECT * FROM `omision_actuar` WHERE `id` = $id");
-		$stmt->execute();
-		return $stmt->get_result()->fetch_assoc();
-	}
-
-	public function getResultadoInvestigacion($id){
-		$stmt = $this->con3->prepare("SELECT * FROM `resultado_investigacion` WHERE `id` = $id");
-		$stmt->execute();
-		return $stmt->get_result()->fetch_assoc();
-	}
-
-	public function getTraslado($id){
-		$stmt = $this->con3->prepare("SELECT * FROM `traslado` WHERE `id` = $id");
-		$stmt->execute();
-		return $stmt->get_result()->fetch_assoc();
-	}
-
-	public function getVictima($id){
-		$stmt = $this->con3->prepare("SELECT * FROM `victima` WHERE `id` = $id");
-		$stmt->execute();
-		return $stmt->get_result()->fetch_assoc();
 	}
 
 	public function crearReporteAnonimo($usu_email_anonimo, $usu_celular_anonimo, $usu_barrio_anonimo, $usu_provincia_anonimo, $usu_pais_anonimo, $usu_detalle_anonimo, $usu_fecha_hecho_anonimo, $usu_hora_hecho_anonimo, $fecha_reporte_anonimo_creacion, $hora_reporte_anonimo_creacion){
@@ -171,23 +105,11 @@ class DbReporte{
 		mysqli_query($this->con2, $insert_reporte_anonimo) or die(mysqli_error($this->con2));
 	}
 
-
-	public function getObtenerReporte($id){
-		$reporte = array();
-
-		$reporte[] = $this->getVictima($id);
-		$reporte[] = $this->getTraslado($id);
-		$reporte[] = $this->getResultadoInvestigacion($id);
-		$reporte[] = $this->getOmisionActuar($id);
-		$reporte[] = $this->getModalidadDetencion($id);
-		$reporte[] = $this->getHechoPolicial($id);
-		$reporte[] = $this->getFuerzasIntervinientes($id);
-		$reporte[] = $this->getCaracteristicasProcedimiento($id);
-		$reporte[] = $this->getAllanamiento($id);
-		$reporte[] = $this->getEntrevistado($id);
-		$reporte[] = $this->getEntrevistador($id);
-		return $reporte;
+	//traer la informacion del reporte por id
+	public function traerTodoReporte($id){
+		$stmt = $this->con3->prepare("SELECT * from allanamiento, caracteristicas_procedimiento , entrevistado,entrevistador , fuerzas_intervinientes , hecho_policial , modalidad_detencion , omision_actuar , resultado_investigacion , traslado , victima where allanamiento.id =$id");
+		$stmt->execute();
+		return $stmt->get_result()->fetch_assoc();
 	}
-
 
 }
