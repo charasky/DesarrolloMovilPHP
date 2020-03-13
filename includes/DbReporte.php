@@ -63,8 +63,8 @@ class DbReporte{
 		mysqli_query($this->con3, $insert_fuerzas_intervinientes) or die(mysqli_error($this->con3));
 	}
 
-	public function hechoPolicial($usu_dia_hecho, $usu_hora_hecho, $usu_cuantos_acompañan, $usu_cual_lugar, $usu_provincia_hecho, $usu_pais_hecho, $usu_direccion_hecho, $usu_barrio_hecho){
-		$insert_hecho_policial = "insert into hecho_policial values(NULL,'" . $usu_dia_hecho . "','" . $usu_hora_hecho . "','" . $usu_cuantos_acompañan . "','" . $usu_cual_lugar . "','" . $usu_provincia_hecho . "','" . $usu_pais_hecho . "','" . $usu_direccion_hecho . "','" . $usu_barrio_hecho . "')";
+	public function hechoPolicial($usu_dia_hecho, $usu_hora_hecho, $usu_cuantos_acompanian, $usu_cual_lugar, $usu_provincia_hecho, $usu_pais_hecho, $usu_direccion_hecho, $usu_barrio_hecho){
+		$insert_hecho_policial = "insert into hecho_policial values(NULL,'" . $usu_dia_hecho . "','" . $usu_hora_hecho . "','" . $usu_cuantos_acompanian . "','" . $usu_cual_lugar . "','" . $usu_provincia_hecho . "','" . $usu_pais_hecho . "','" . $usu_direccion_hecho . "','" . $usu_barrio_hecho . "')";
 		mysqli_query($this->con3, $insert_hecho_policial) or die(mysqli_error($this->con3));
 	}
 
@@ -109,7 +109,7 @@ class DbReporte{
 	public function traerTodoReporte($id){
 		$stmt = $this->con3->prepare("SELECT * from allanamiento, caracteristicas_procedimiento , entrevistado,entrevistador , fuerzas_intervinientes , hecho_policial , modalidad_detencion , omision_actuar , resultado_investigacion , traslado , victima where allanamiento.id =$id");
 		$stmt->execute();
-		return $stmt->get_result()->fetch_assoc();
+		return $stmt->get_result();
 	}
 
 }

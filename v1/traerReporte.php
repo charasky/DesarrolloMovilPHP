@@ -2,7 +2,7 @@
 
 require_once '../includes/DbReporte.php';
 require_once '../includes/DbOperations.php';
-$response = [];
+$response = array();
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
 
@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 
 			if($db1->isUserExist($usuario)){
-				$response = $db->traerTodoReporte($id);
+				$response = mysqli_fetch_assoc($db->traerTodoReporte($id));
 			}else{
 				$response = "usuario no valido";
 			}
@@ -26,27 +26,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 	}
 }
 
-function utf8ize($d) {
-    if (is_array($d)) {
-        foreach ($d as $k => $v) {
-            $d[$k] = utf8ize($v);
-        }
-    } else if (is_string ($d)) {
-        return utf8_encode($d);
-    }
-    return $d;
-}
+echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
-
-echo( json_encode([
-  'data' => $response
-], JSON_UNESCAPED_UNICODE) );
-
-echo json_encode($response, JSON_FORCE_OBJECT);
-
-echo json_encode(utf8ize($response), JSON_FORCE_OBJECT);
-
-echo "todos putos :v 2 ";
+echo "todos putos :v 4 ";
 
 
 ?>
