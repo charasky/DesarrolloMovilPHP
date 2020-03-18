@@ -1,32 +1,41 @@
-<?php 
+<?php
+require_once '../includes/DbOperations.php';
 
-require_once '../includes/DbReporte.php';
-$validate =true;
 $response = array();
+
 if($_SERVER['REQUEST_METHOD']=='POST'){
-	if(isset($_POST['fechaReporteCreacion']) and 
-		isset($_POST['horaReporteCreacion']) and 
-			isset($_POST['reporteAnonimo'])){
+	if(isset($_POST['registracion_usuario'])){
 
-		$fecha=$_POST['fechaReporteAnonimo'];
-		$hora=$_POST['horaReporteAnonimo'];
-		$obj = json_decode($_POST['reporteAnonimo']);
-		$db = new DbReporte();
+		$db = new DbOperations();
+		$obj = json_decode($_POST['registracion_usuario']);
 
-		$db->crearReporteAnonimo($obj->{'usu_email_anonimo'}, $obj->{'usu_celular_anonimo'}, $obj->{'usu_barrio_anonimo'}, $obj->{'usu_provincia_anonimo'}, $obj->{'usu_pais_anonimo'}, $obj->{'usu_detalle_anonimo'}, $obj->{'usu_fecha_hecho_anonimo'}, $obj->{'usu_hora_hecho_anonimo'});
-		
-		$response['error'] = false;
-		$response['message'] = "Se ha guardado correctamente.";
-		$response['validate'] = true;
-		
+		$result = $db->createUser($obj->{'usu_usuario'},
+					$obj->{'usu_password'},
+					ucwords(strtolower($obj->{'usu_nombres'})),
+					ucwords(strtolower($obj->{'usu_apellidos'})),
+					$obj->{'usu_asamblea'});
+		if($result == 1){
+			$response['error'] = false;
+			$response['message'] = "Registro exitoso.";
+		}elseif($result == 2){
+			$response['error'] = true;
+			$response['message'] = "Algun error ocurrio intente denuevo.";
+		}elseif($result == 3){
+			$response['error'] = true;
+			$response['message'] = "La Asamblea ingresada no existe.";
+			$response['existe'] = "asamblea";
+		}elseif($result == 0){
+			$response['error'] = true;
+			$response['message'] = "El email ingresado ya existe, ingrese otro.";
+			$response['existe'] = "email";
+		}
 	}else{
 		$response['error'] = true;
-		$response['message'] = "Required fields are missing";	
-	}	
+		$response['message'] = "required fields are missing";
+	}
 }else{
-	$response['error'] = true; 
+	$response['error'] = true;
 	$response['message'] = "Invalid Request";
 }
 
 echo json_encode($response);
-?>

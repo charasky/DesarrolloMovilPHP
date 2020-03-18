@@ -109,7 +109,7 @@ class DbReporte{
 	public function traerTodoReporte($id){
 		$stmt = $this->con3->prepare("SELECT * from allanamiento, caracteristicas_procedimiento , entrevistado,entrevistador , fuerzas_intervinientes , hecho_policial , modalidad_detencion , omision_actuar , resultado_investigacion , traslado , victima where allanamiento.id =$id");
 		$stmt->execute();
-		return $stmt->get_result();
+		return $stmt->get_result()->fetch_assoc();
 	}
 
 }

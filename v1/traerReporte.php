@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 
 			if($db1->isUserExist($usuario)){
-				$response = mysqli_fetch_assoc($db->traerTodoReporte($id));
+				$response = $db->traerTodoReporte($id);
 			}else{
 				$response = "usuario no valido";
 			}
@@ -26,9 +26,26 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 	}
 }
 
+
+function utf8ize($d) {
+    if (is_array($d)) {
+        foreach ($d as $k => $v) {
+            $d[$k] = utf8ize($v);
+        }
+    } else if (is_string ($d)) {
+        return utf8_encode($d);
+    }
+    return $d;
+}
+
+
 echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
-echo "todos putos :v 4 ";
+//echo json_encode($response, JSON_FORCE_OBJECT);
+
+//echo json_encode(utf8ize($response), JSON_FORCE_OBJECT);
+
+echo strftime("Hoy: %A %H:%M");
 
 
 ?>
