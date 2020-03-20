@@ -38,14 +38,6 @@ function utf8ize($d) {
     return $d;
 }
 
-
-echo json_encode($response, JSON_UNESCAPED_UNICODE);
-
-//echo json_encode($response, JSON_FORCE_OBJECT);
-
-//echo json_encode(utf8ize($response), JSON_FORCE_OBJECT);
-
-echo strftime("Hoy: %A %H:%M");
-
+echo json_encode(utf8ize($response), JSON_FORCE_OBJECT);
 
 ?>
