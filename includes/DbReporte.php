@@ -112,4 +112,9 @@ class DbReporte{
 		return $stmt->get_result()->fetch_assoc();
 	}
 
+	public function editReporte($id, $dbTable, $dbSet, $valorSet){
+		$stmt = $this->con3->prepare("UPDATE $dbTable SET $dbSet = '$valorSet' WHERE $dbTable.id = $id");
+		$stmt->execute();
+	}
+
 }
